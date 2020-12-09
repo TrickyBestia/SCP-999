@@ -33,27 +33,35 @@
   <ItemGroup>
     <Reference Include="Assembly-CSharp-Publicized">
       <HintPath>$(EXILED_REFERENCES)\Assembly-CSharp-Publicized.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="CommandSystem.Core">
       <HintPath>$(EXILED_REFERENCES)\CommandSystem.Core.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Exiled.API, Version=2.1.18.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\EXILED.2.1.18\lib\net472\Exiled.API.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Exiled.Bootstrap, Version=2.1.18.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\EXILED.2.1.18\lib\net472\Exiled.Bootstrap.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Exiled.Events, Version=2.1.18.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\EXILED.2.1.18\lib\net472\Exiled.Events.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Exiled.Loader, Version=2.1.18.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\EXILED.2.1.18\lib\net472\Exiled.Loader.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Exiled.Permissions, Version=2.1.18.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\EXILED.2.1.18\lib\net472\Exiled.Permissions.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Exiled.Updater, Version=3.0.3.0, Culture=neutral, processorArchitecture=AMD64">
       <HintPath>..\packages\EXILED.2.1.18\lib\net472\Exiled.Updater.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,6 +73,7 @@
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(EXILED_REFERENCES)\UnityEngine.CoreModule.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup>
