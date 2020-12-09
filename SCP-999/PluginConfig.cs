@@ -17,5 +17,7 @@ namespace SCP_999
         public float ScaleY { get; set; } = 0.6f;
         [Description("Z component of SCP-999 scale vector.")]
         public float ScaleZ { get; set; } = 0.6f;
+        [Description("Max percent of health which can be restored by SCP-999.")]
+        public int MaxHealPercent { get; set; } = 100;
     }
 }

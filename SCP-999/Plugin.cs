@@ -36,7 +36,16 @@ namespace SCP_999
         private void OnPlayerShot(ShotEventArgs ev)
         {
             if (Scp999Manager.IsScp999(ev.Shooter))
-                ev.Damage = -Config.HealPerShot;
+            {
+                ev.Damage = 0;
+                var referenceHub = ev.Target.GetComponent<ReferenceHub>();
+                if (referenceHub != null)
+                {
+                    var player = Player.Get(referenceHub);
+                    if (player.Health + Config.HealPerShot <= player.MaxHealth * Config.MaxHealPercent / 100)
+                        player.Health += Config.HealPerShot;
+                }
+            }
         }
         private void OnPlayerShooting(ShootingEventArgs ev)
         {
