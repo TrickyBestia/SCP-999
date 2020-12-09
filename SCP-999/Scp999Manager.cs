@@ -52,7 +52,7 @@ namespace SCP_999
             player.Inventory.AddNewItem(Plugin.Instance.Config.Weapon);
             player.IsGodModeEnabled = true;
             yield return Timing.WaitForSeconds(0.2f);
-            player.Scale = new Vector3(0.6f, 0.6f, 0.6f);
+            player.Scale = new Vector3(Plugin.Instance.Config.ScaleX, Plugin.Instance.Config.ScaleY, Plugin.Instance.Config.ScaleZ);
             yield return Timing.WaitForSeconds(0.2f);
             if (currentPosition.HasValue)
                 player.Position = currentPosition.Value;
