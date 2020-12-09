@@ -26,12 +26,18 @@ namespace SCP_999
             }
         }
         public static bool IsScp999(Player player) => _scps.Any(scp => scp.UserId == player.UserId);
-        public static void MakeScp999(Player player) => Timing.RunCoroutine(MakeScp999Coroutine(player));
+        public static void MakeScp999(Player player)
+        {
+            if (IsScp999(player))
+                throw new InvalidOperationException("Player is already SCP-999");
+            Timing.RunCoroutine(MakeScp999Coroutine(player));
+        }
         public static void UnMakeScp999(Player player)
         {
             if (!IsScp999(player))
                 throw new InvalidOperationException("Player is not SCP-999");
             player.Scale = Vector3.one;
+            player.IsGodModeEnabled = false;
             Scp999 scp = _scps.First(scp999 => scp999.UserId == player.UserId);
             var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
             nicknameSync.CustomPlayerInfo = scp.PreviousRank;
@@ -39,12 +45,12 @@ namespace SCP_999
         }
         private static IEnumerator<float> MakeScp999Coroutine(Player player)
         {
-            if (IsScp999(player))
-                throw new InvalidOperationException("Player is already SCP-999");
             Vector3? currentPosition = null;
             if (player.IsAlive)
                 currentPosition = player.GameObject.transform.position;
             player.SetRole(RoleType.Tutorial);
+            player.Inventory.AddNewItem(Plugin.Instance.Config.Weapon);
+            player.IsGodModeEnabled = true;
             yield return Timing.WaitForSeconds(0.2f);
             player.Scale = new Vector3(0.6f, 0.6f, 0.6f);
             yield return Timing.WaitForSeconds(0.2f);
