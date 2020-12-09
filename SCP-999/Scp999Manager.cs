@@ -52,13 +52,12 @@ namespace SCP_999
             player.Inventory.AddNewItem(Plugin.Instance.Config.Weapon);
             player.IsGodModeEnabled = true;
             yield return Timing.WaitForSeconds(0.2f);
-            player.Scale = new Vector3(0.6f, 0.6f, 0.6f);
+            player.Scale = new Vector3(Plugin.Instance.Config.ScaleX, Plugin.Instance.Config.ScaleY, Plugin.Instance.Config.ScaleZ);
             yield return Timing.WaitForSeconds(0.2f);
             if (currentPosition.HasValue)
                 player.Position = currentPosition.Value;
-            var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
-            _scps.Add(new Scp999(player.UserId, nicknameSync.CustomPlayerInfo));
-            nicknameSync.CustomPlayerInfo = "SCP-999";
+            _scps.Add(new Scp999(player.UserId, player.RankName));
+            player.RankName = "SCP-999";
         }
     }
 }

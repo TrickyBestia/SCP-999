@@ -11,5 +11,11 @@ namespace SCP_999
         public ItemType Weapon { get; set; } = ItemType.GunUSP;
         [Description("Heal per shot.")]
         public int HealPerShot { get; set; } = 5;
+        [Description("X component of SCP-999 scale vector.")]
+        public float ScaleX { get; set; } = 0.6f;
+        [Description("Y component of SCP-999 scale vector.")]
+        public float ScaleY { get; set; } = 0.6f;
+        [Description("Z component of SCP-999 scale vector.")]
+        public float ScaleZ { get; set; } = 0.6f;
     }
 }
