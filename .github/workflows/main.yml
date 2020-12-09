@@ -1,0 +1,53 @@
+name: Main CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  Build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Setup MSBuild
+        uses: microsoft/setup-msbuild@v1.0.2
+
+      - name: Setup NuGet
+        uses: nuget/setup-nuget@v1
+
+      - name: Pull repository
+        uses: actions/checkout@v2.3.1
+
+      - name: Download 7zip
+        uses: carlosperate/download-file-action@v1.0.3
+        with:
+          file-url: 'https://www.exiled.host/7za.exe'
+          file-name: '7zip.exe'
+
+      - name: Download references
+        uses: carlosperate/download-file-action@v1.0.3
+        with:
+          file-url: 'https://www.exiled.host/build_deps/References.zip'
+          file-name: 'References.zip'
+
+      - name: Extract Refs
+        run: ./7zip.exe e References.zip -oReferences -r -y
+
+      - name: Restore NuGet packages
+        run: nuget restore SCP-999.sln
+
+      - name: Build
+        run: |
+          msbuild SCP-999.sln -p:Configuration=Release -p:OutDir=../build
+          if ($? -eq $false) { Exit 1 }
+        env:
+          EXILED_REFERENCES: ${{ github.workspace }}/References
+
+      - name: Switch to project direcotry
+        run: cd SCP-999
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: SCP-999
+          path: build
