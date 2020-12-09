@@ -1,4 +1,5 @@
 ﻿using Exiled.API.Features;
+using MEC;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,20 +26,7 @@ namespace SCP_999
             }
         }
         public static bool IsScp999(Player player) => _scps.Any(scp => scp.UserId == player.UserId);
-        public static void MakeScp999(Player player)
-        {
-            if (IsScp999(player))
-                throw new InvalidOperationException("Player is already SCP-999");
-            var currentPosition = player.Position;
-            var currentRotation = player.Rotation;
-            player.SetRole(RoleType.Tutorial);
-            player.Position = currentPosition;
-            player.Rotation = currentRotation;
-            player.Scale = new Vector3(0.6f, 0.6f, 0.6f);
-            var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
-            _scps.Add(new Scp999(player.UserId, nicknameSync.CustomPlayerInfo));
-            nicknameSync.CustomPlayerInfo = "SCP-999";
-        }
+        public static void MakeScp999(Player player) => Timing.RunCoroutine(MakeScp999Coroutine(player));
         public static void UnMakeScp999(Player player)
         {
             if (!IsScp999(player))
@@ -48,6 +36,23 @@ namespace SCP_999
             var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
             nicknameSync.CustomPlayerInfo = scp.PreviousRank;
             _scps.Remove(scp);
+        }
+        private static IEnumerator<float> MakeScp999Coroutine(Player player)
+        {
+            if (IsScp999(player))
+                throw new InvalidOperationException("Player is already SCP-999");
+            Vector3? currentPosition = null;
+            if (player.IsAlive)
+                currentPosition = player.GameObject.transform.position;
+            player.SetRole(RoleType.Tutorial);
+            yield return Timing.WaitForSeconds(0.2f);
+            player.Scale = new Vector3(0.6f, 0.6f, 0.6f);
+            yield return Timing.WaitForSeconds(0.2f);
+            if (currentPosition.HasValue)
+                player.Position = currentPosition.Value;
+            var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
+            _scps.Add(new Scp999(player.UserId, nicknameSync.CustomPlayerInfo));
+            nicknameSync.CustomPlayerInfo = "SCP-999";
         }
     }
 }
