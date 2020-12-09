@@ -6,4 +6,4 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyProduct("SCP-999")]
 [assembly: AssemblyCopyright("Copyright © TrickyBestia 2020")]
 [assembly: ComVisible(false)]
-[assembly: AssemblyVersion("1.0.*")]
+[assembly: AssemblyVersion("1.1.*")]
