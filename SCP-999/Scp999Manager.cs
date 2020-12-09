@@ -56,9 +56,8 @@ namespace SCP_999
             yield return Timing.WaitForSeconds(0.2f);
             if (currentPosition.HasValue)
                 player.Position = currentPosition.Value;
-            var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
-            _scps.Add(new Scp999(player.UserId, nicknameSync.CustomPlayerInfo));
-            nicknameSync.CustomPlayerInfo = "SCP-999";
+            _scps.Add(new Scp999(player.UserId, player.RankName));
+            player.RankName = "SCP-999";
         }
     }
 }
