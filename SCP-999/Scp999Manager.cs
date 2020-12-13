@@ -39,8 +39,7 @@ namespace SCP_999
             player.Scale = Vector3.one;
             player.IsGodModeEnabled = false;
             Scp999 scp = _scps.First(scp999 => scp999.UserId == player.UserId);
-            var nicknameSync = player.GameObject.GetComponent<NicknameSync>();
-            nicknameSync.CustomPlayerInfo = scp.PreviousRank;
+            player.RankName = scp.PreviousRank;
             _scps.Remove(scp);
         }
         private static IEnumerator<float> MakeScp999Coroutine(Player player)
