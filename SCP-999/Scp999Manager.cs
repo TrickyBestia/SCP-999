@@ -50,9 +50,9 @@ namespace SCP_999
             player.SetRole(RoleType.Tutorial);
             player.Inventory.AddNewItem(Plugin.Instance.Config.Weapon);
             player.IsGodModeEnabled = true;
-            yield return Timing.WaitForSeconds(0.2f);
+            yield return Timing.WaitForSeconds(0.4f);
             player.Scale = new Vector3(Plugin.Instance.Config.ScaleX, Plugin.Instance.Config.ScaleY, Plugin.Instance.Config.ScaleZ);
-            yield return Timing.WaitForSeconds(0.2f);
+            yield return Timing.WaitForSeconds(0.4f);
             if (currentPosition.HasValue)
                 player.Position = currentPosition.Value;
             _scps.Add(new Scp999(player.UserId, player.RankName));
