@@ -9,9 +9,7 @@ namespace SCP_999.Commands
     public class Spawn999Command : ICommand
     {
         public string Command { get; } = "spawn999";
-
         public string[] Aliases { get; } = new string[0];
-
         public string Description { get; } = "Turns player with specified id into SCP-999";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
