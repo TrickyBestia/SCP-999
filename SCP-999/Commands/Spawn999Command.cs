@@ -1,6 +1,7 @@
 ﻿using CommandSystem;
 using Exiled.API.Features;
 using System;
+using Exiled.Permissions.Extensions;
 
 namespace SCP_999.Commands
 {
@@ -8,15 +9,18 @@ namespace SCP_999.Commands
     public class Spawn999Command : ICommand
     {
         public string Command { get; } = "spawn999";
-
         public string[] Aliases { get; } = new string[0];
-
         public string Description { get; } = "Turns player with specified id into SCP-999";
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
             int id;
-            if (arguments.Count != 1 || !int.TryParse(arguments.At(0), out id))
+            if (!sender.CheckPermission("spawn999"))
+            {
+                response = "You don't have enough permissions.";
+                return false;
+            }
+            else if (arguments.Count != 1 || !int.TryParse(arguments.At(0), out id))
             {
                 response = "Command failed, incorrect arguments.\nthe command is spawn999 id";
                 return false;

@@ -13,7 +13,7 @@ namespace SCP_999
         public override string Author { get; } = "TrickyBestia";
         public override string Name { get; } = "SCP-999";
         public override string Prefix { get; } = "SCP-999";
-        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 18);
+        public override Version RequiredExiledVersion { get; } = new Version(2, 1, 19);
         public override PluginPriority Priority { get; } = PluginPriority.Default;
         public override Version Version => Assembly.GetName().Version;
 
