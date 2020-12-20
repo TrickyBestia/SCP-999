@@ -14,25 +14,29 @@ namespace SCP_999.Commands
 
         public bool Execute(ArraySegment<string> arguments, ICommandSender sender, out string response)
         {
-            int id;
+            Player player;
             if (!sender.CheckPermission("spawn999"))
             {
                 response = "You don't have enough permissions.";
                 return false;
             }
-            else if (arguments.Count != 1 || !int.TryParse(arguments.At(0), out id))
+            else if (arguments.Count != 1 || !int.TryParse(arguments.At(0), out int id))
             {
                 response = "Command failed, incorrect arguments.\nthe command is spawn999 id";
                 return false;
             }
-            else if (Scp999Manager.IsScp999(Player.Get(id)))
+            else if ((player = Player.Get(id)) == null)
+            {
+                response = $"Player with id {id} can't be found.";
+                return false;
+            }
+            else if (Scp999Manager.IsScp999(player))
             {
                 response = "Player is already SCP-999.";
                 return false;
             }
             else
             {
-                var player = Player.Get(id);
                 Scp999Manager.MakeScp999(player);
                 response = $"Ok, {player.Nickname} is SCP-999 now.";
                 return true;
