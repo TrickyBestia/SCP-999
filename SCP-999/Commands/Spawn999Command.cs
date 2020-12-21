@@ -22,7 +22,7 @@ namespace SCP_999.Commands
             }
             else if (arguments.Count != 1 || !int.TryParse(arguments.At(0), out int id))
             {
-                response = "Command failed, incorrect arguments.\nthe command is spawn999 id";
+                response = "Command failed, incorrect arguments.";
                 return false;
             }
             else if ((player = Player.Get(id)) == null)
